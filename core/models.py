@@ -1,8 +1,14 @@
 from django.db import models
 from model_utils import Choices
+from datetime import date
 
 class Obra(models.Model):
-    titulo = models.CharField(max_length=150, verbose_name='Título')
+    titulo = models.CharField(max_length=250,
+                              blank=False,
+                              verbose_name='Título')
+    qtd_disponivel = models.PositiveIntegerField(blank=False,
+                                                 verbose_name='Quantidade Disponível')
+
 
     class Meta:
         verbose_name = 'Obra'
@@ -13,8 +19,10 @@ class Obra(models.Model):
         return self.titulo
 
 class CampanhaDoacao(models.Model):
-    data_inicio = models.DateField(verbose_name='Data Início')
-    data_fim = models.DateField(verbose_name='Data Início')
+    data_inicio = models.DateField(verbose_name='Data Início',
+                                   blank=False)
+    data_fim = models.DateField(verbose_name='Data Início',
+                                blank=False)
 
     class Meta:
         verbose_name = 'Campanha de Doação'
@@ -22,7 +30,7 @@ class CampanhaDoacao(models.Model):
         ordering = ['-data_inicio']
 
     def __str__(self):
-        return "Campanha de %s a %s" % (str(self.data_inicio), str(self.data_fim))
+        return "Campanha de {} a {}".format(str(self.data_inicio), str(self.data_fim))
 
 
 #class StatusPedido(models.Model):
@@ -33,15 +41,17 @@ class CampanhaDoacao(models.Model):
 class Pedido(models.Model):
 
     STATUS_CHOICES = Choices(
-        ('DT', 'Deferido totalmente', 'Deferido totalmente'),
+        ('DT', 'Deferido totalmente', 'Deferido Totalmente'),
         ('I', 'Indeferido', 'Indeferido'),
-        ('DP', 'Deferido parcialmente', 'Deferido parcialmente'),
+        ('DP', 'Deferido parcialmente', 'Deferido Parcialmente'),
     )
     campanha = models.ForeignKey(CampanhaDoacao,
                                  on_delete=models.PROTECT,
                                  verbose_name='Campanha de Doação')
 
-    data_pedido = models.DateField(verbose_name='Data Início')
+    data_pedido = models.DateField(verbose_name='Data do Pedido',
+                                   default=date.today(),
+                                   blank=False)
 
     #    status_pedido = models.ForeignKey(StatusPedido, verbose_name='Status do Pedido')
     status_pedido = models.CharField(max_length=1,
