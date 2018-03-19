@@ -1,13 +1,14 @@
 from django.db import models
 from model_utils import Choices
-from datetime import date
+from django.utils.translation import ugettext_lazy as _
+import django.utils.timezone
 
 class Obra(models.Model):
     titulo = models.CharField(max_length=250,
                               blank=False,
-                              verbose_name='Título')
+                              verbose_name=_('Título'))
     qtd_disponivel = models.PositiveIntegerField(blank=False,
-                                                 verbose_name='Quantidade Disponível')
+                                                 verbose_name=_('Quantidade Disponível'))
 
 
     class Meta:
@@ -19,9 +20,9 @@ class Obra(models.Model):
         return self.titulo
 
 class CampanhaDoacao(models.Model):
-    data_inicio = models.DateField(verbose_name='Data Início',
+    data_inicio = models.DateField(verbose_name=_('Data Início'),
                                    blank=False)
-    data_fim = models.DateField(verbose_name='Data Início',
+    data_fim = models.DateField(verbose_name=_('Data Fim'),
                                 blank=False)
 
     class Meta:
@@ -47,26 +48,28 @@ class Pedido(models.Model):
     )
     campanha = models.ForeignKey(CampanhaDoacao,
                                  on_delete=models.PROTECT,
-                                 verbose_name='Campanha de Doação')
+                                 verbose_name=_('Campanha de Doação'))
 
-    data_pedido = models.DateField(verbose_name='Data do Pedido',
-                                   default=date.today(),
+    data_pedido = models.DateField(verbose_name=_('Data do Pedido'),
+                                   default=django.utils.timezone.now,
                                    blank=False)
 
     #    status_pedido = models.ForeignKey(StatusPedido, verbose_name='Status do Pedido')
     status_pedido = models.CharField(max_length=1,
-                                     verbose_name='Esfera Federação',
+                                     verbose_name=_('Esfera Federação'),
                                      choices=STATUS_CHOICES)
 
 
 
 class ItemPedido(models.Model):
-    obra = models.ForeignKey(Obra, verbose_name='Obra', on_delete=models.CASCADE)
-    data_requisicao = models.DateField(verbose_name='Data Requisição')
-    quantidade = models.PositiveIntegerField(verbose_name='Quantidade')
+    obra = models.ForeignKey(Obra, verbose_name=_('Obra'),
+                             on_delete=models.CASCADE)
+    data_requisicao = models.DateField(verbose_name=_('Data Requisição'))
+    quantidade = models.PositiveIntegerField(verbose_name=_('Quantidade'))
     # status = models.ForeignKey(StatusRequisicao,
     #                            on_delete=models.PROTECT,
     #                            verbose_name='Status da Requisição')
 
-    pedido = models.ForeignKey(Pedido, verbose_name='Item do pedido', on_delete=models.CASCADE)
+    pedido = models.ForeignKey(Pedido, verbose_name=_('Item do pedido'),
+                               on_delete=models.CASCADE)
 
