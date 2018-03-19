@@ -1,7 +1,10 @@
 from django.db import models
 from model_utils import Choices
 from django.utils.translation import ugettext_lazy as _
+from ssl.users.models import User
+from orgao.models import Orgao
 import django.utils.timezone
+
 
 class Obra(models.Model):
     titulo = models.CharField(max_length=250,
@@ -31,7 +34,7 @@ class CampanhaDoacao(models.Model):
         ordering = ['-data_inicio']
 
     def __str__(self):
-        return "Campanha de {} a {}".format(str(self.data_inicio), str(self.data_fim))
+        return _('Campanha de {} a {}'.format(str(self.data_inicio), str(self.data_fim)))
 
 
 #class StatusPedido(models.Model):
@@ -73,3 +76,25 @@ class ItemPedido(models.Model):
     pedido = models.ForeignKey(Pedido, verbose_name=_('Item do pedido'),
                                on_delete=models.CASCADE)
 
+
+class Representacao(models.Model):
+    representante = models.OneToOneField(User,
+                                         verbose_name=_('Representante'),
+                                         on_delete=models.PROTECT,
+                                         null=True)
+
+    orgao_representado = models.ForeignKey(Orgao,
+                                           verbose_name=_('Órgão Representado'),
+                                           on_delete=models.PROTECT)
+
+    data_inicio_representacao = models.DateField(verbose_name=_('Data Início da Representação'),
+                                                 blank=False)
+    data_fim_representacao = models.DateField(verbose_name=_('Data Fim da Representação'))
+
+    class Meta:
+        verbose_name = _('Representação')
+        verbose_name_plural = _('Representações')
+        ordering = ['orgao_representado', 'representante']
+
+    def __str__(self):
+        return _('Representação de(a) {}'.format(self.orgao_representado))
