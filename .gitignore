@@ -345,4 +345,4 @@ ssl/media/
 !/compose/local/
 
 .env
-.envs/*
+.envs/.production
