@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block title %}{{ user.username }}{% endblock %}
@@ -10,8 +12,11 @@
     {{ form|crispy }}
     <div class="control-group">
       <div class="controls">
-        <button type="submit" class="btn">Update</button>
+        <button class="btn btn-primary waves-effect waves-light right" type="submit">{% trans "Update" %}
+          <i class="material-icons right">update</i>
+        </button>
       </div>
     </div>
   </form>
+<br><br>
 {% endblock %}

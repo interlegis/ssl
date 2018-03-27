@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container">
-  <h2>Users</h2>
+  <h2>{% trans 'Users' %}</h2>
 
   <div class="list-group">
     {% for user in user_list %}
@@ -14,4 +14,5 @@
     {% endfor %}
   </div>
 </div>
+<br><br><br>
 {% endblock content %}

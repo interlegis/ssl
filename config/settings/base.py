@@ -251,5 +251,9 @@ ACCOUNT_ADAPTER = 'ssl.users.adapters.AccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'ssl.users.adapters.SocialAccountAdapter'
 
 
-# Your stuff...
+# LOCALE
 # ------------------------------------------------------------------------------
+# Locale Path
+LOCALE_PATHS = (
+    str(APPS_DIR.path('locale')),
+)

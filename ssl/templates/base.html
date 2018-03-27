@@ -38,7 +38,7 @@
     <div class="nav-wrapper container">
       <a href="{%  url 'home' %}" class="brand-logo"><i class="material-icons">book</i>SDL</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li class="active"><a href="{% url 'home' %}"><b>Home</b></a></li>
+        <li class="active"><a class="waves-effect waves-light" href="{% url 'home' %}"><b>Home</b></a></li>
         {% if request.user.is_authenticated %}
           <li><a href="{% url 'users:detail' request.user.username %}"><b>{% trans "My Profile" %}</b></a></li>
           <li><a href="{% url 'account_logout' %}"><b>{% trans "Sign Out" %}</b></a></li>
@@ -52,16 +52,16 @@
   </nav>
 
 
-    <div class="container">
+  <div class="container">
 
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-          {% endfor %}
-      {% endif %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
 
-      {% block content %}
-      {% endblock content %}
+    {% block content %}
+    {% endblock content %}
 
     <div class="fixed-action-btn horizontal">
       <a class="btn-floating btn-large red">
@@ -74,7 +74,7 @@
         <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
       </ul>
     </div>
-    </div> <!-- /container -->
+  </div> <!-- /container -->
 
   <footer class="page-footer blue-grey darken-3"">
     <div class="container">
