@@ -1,3 +1,4 @@
+from __future__ import unicode_literals, absolute_import
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
@@ -8,7 +9,6 @@ from .models import User
 class MyUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = User
-
 
 class MyUserCreationForm(UserCreationForm):
 
@@ -32,8 +32,9 @@ class MyUserCreationForm(UserCreationForm):
 class MyUserAdmin(AuthUserAdmin):
     form = MyUserChangeForm
     add_form = MyUserCreationForm
-    fieldsets = (
-            ('User Profile', {'fields': ('name',)}),
-    ) + AuthUserAdmin.fieldsets
-    list_display = ('username', 'name', 'is_superuser')
+    fieldsets = AuthUserAdmin.fieldsets + (
+            ('User Profile', {'fields': ('name',
+                                         'phone',)}),
+    )
+    list_display = ('username', 'name')
     search_fields = ['name']
