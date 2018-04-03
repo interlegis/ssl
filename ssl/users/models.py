@@ -9,7 +9,7 @@ class User(AbstractUser):
     name = models.CharField(_('Nome do Usuário'), blank=True, max_length=255)
     phone = models.BigIntegerField(_('Telefone'), blank=True,
                                    null=True,
-                                help_text="Preencha com DDD e o número (sem símbolos especiais")
+                                help_text="Preencha com DDD e o número (sem símbolos especiais)")
 
     def __str__(self):
         return self.username
