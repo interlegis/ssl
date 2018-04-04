@@ -2,7 +2,7 @@ from django.db import models
 from model_utils import Choices
 from django.utils.translation import ugettext_lazy as _
 from ssl.users.models import User
-from orgao.models import Orgao
+from ssl.orgao.models import Orgao
 import django.utils.timezone
 
 

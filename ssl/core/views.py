@@ -1,11 +1,24 @@
 from django.views.generic import CreateView
-from core.models import ArquivoExcel
-from core.forms import UpdateExcelForm
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from .forms import UpdateExcelForm
+from .models import ArquivoExcel
+from .utils import read_excel
 
 class UploadExcelView(CreateView):
     template_name = "core/upload_excel.html"
     form_class = UpdateExcelForm
     model = ArquivoExcel
+
+    def upload_file(request):
+        if request.method == 'POST':
+            form = UpdateExcelForm(request.POST, request.FILES)
+            if form.is_valid():
+                read_excel(request.FILES['file'])
+                return HttpResponseRedirect('/success/url/')
+        else:
+            form = UpdateExcelForm()
+        return render(request, 'upload_excel.html', {'form': form})
 
     def form_valid(self, form):
         pass
