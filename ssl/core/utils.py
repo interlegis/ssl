@@ -1,6 +1,6 @@
 import xlrd
 
-def read_excel(filename:
+def read_excel(filename):
     book = xlrd.open_workbook(filename)
     sh = book.sheet_by_index(0)
     obras = []

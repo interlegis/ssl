@@ -1,15 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Carga de Obras</title>
-</head>
-<body>
-  <strong>Carga de Obras</strong>
+{% extends "base.html" %}
+{% block content %}
+  <h2 class="center-align">Carga de Obras</h2>
+  <div class="container">
     <form action="" method="post">
       {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Enviar" />
+      <div class="file-field input-field">
+      <div class="btn green darken-1">
+        <span>Arquivo</span>
+        <input type="file">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+      <button class="btn waves-effect waves-light right" type="submit" name="action">Enviar
+        <i class="material-icons right">send</i>
+      </button>
     </form>
-</body>
-</html>
+  <br><br><br>
+  </div>
+{% endblock content %}
