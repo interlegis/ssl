@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2 class="center-align">Campanha de Doação</h2>
+  <div class="container">
+    <form action="#" method="post">
+      {% csrf_token %}
+    <div class="input-field row">
+      <input type="date"  class="datepicker col m5 s6 left">
+      <input type="date"  class="datepicker col m5 s6 right">
+    </div>
+      <button class="btn waves-effect waves-light right" type="submit" name="action">Enviar
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
+  <br><br><br>
+  </div>
+{% endblock content %}
+

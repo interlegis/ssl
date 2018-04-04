@@ -8,4 +8,9 @@ urlpatterns = [
         view=views.UploadExcelView.as_view(),
         name='upload_excel'
     ),
+    url(
+        regex=r'^campanha/$',
+        view=views.CreateCampanhaView.as_view(),
+        name='create_campanha'
+    ),
 ]

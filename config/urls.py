@@ -23,6 +23,11 @@ urlpatterns = [
         view=core_views.UploadExcelView.as_view(),
         name='upload_excel'
     ),
+    url(
+        regex=r'^campanha/$',
+        view=core_views.CreateCampanhaView.as_view(),
+        name='create_campanha'
+    ),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

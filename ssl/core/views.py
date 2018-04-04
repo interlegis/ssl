@@ -2,7 +2,7 @@ from django.views.generic import CreateView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import UpdateExcelForm
-from .models import ArquivoExcel
+from .models import ArquivoExcel, CampanhaDoacao
 from .utils import read_excel
 
 class UploadExcelView(CreateView):
@@ -36,3 +36,8 @@ class UploadExcelView(CreateView):
     #         return self.form_valid(form)
     #     else:
     #         return self.form_invalid(form)
+
+class CreateCampanhaView(CreateView):
+    template_name = "core/create_campanha.html"
+    model = CampanhaDoacao
+    fields = ['data_inicio', 'data_fim']
