@@ -170,6 +170,7 @@ TEMPLATES = [
         # https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         'DIRS': [
             str(APPS_DIR.path('templates')),
+            str(APPS_DIR.path('core/templates/core')),
         ],
         'OPTIONS': {
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
@@ -257,3 +258,12 @@ SOCIALACCOUNT_ADAPTER = 'ssl.users.adapters.SocialAccountAdapter'
 LOCALE_PATHS = (
     str(APPS_DIR.path('locale')),
 )
+
+
+# FILE UPLOAD
+# ------------------------------------------------------------------------------
+# File Upload Handlers
+FILE_UPLOAD_HANDLERS = [
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler"
+]

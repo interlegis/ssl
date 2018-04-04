@@ -98,3 +98,8 @@ class Representacao(models.Model):
 
     def __str__(self):
         return _('Representação de(a) {}'.format(self.orgao_representado))
+
+
+class ArquivoExcel(models.Model):
+    arquivo = models.FileField()
+    data_upload = models.DateTimeField(auto_now_add=True)
