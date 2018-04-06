@@ -5,8 +5,10 @@
     <form action="#" method="post">
       {% csrf_token %}
     <div class="input-field row">
-      <input type="date"  class="datepicker col m5 s6 left">
-      <input type="date"  class="datepicker col m5 s6 right">
+      Data do Inicio da Campanha:
+      <input type="date"  name="data_inicio" class="date">
+      Data do Fim da Campanha:
+      <input type="date"  name="data_fim" class="date">
     </div>
       <button class="btn waves-effect waves-light right" type="submit" name="action">Enviar
         <i class="material-icons right">send</i>

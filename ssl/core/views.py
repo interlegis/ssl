@@ -1,4 +1,5 @@
-from django.views.generic import CreateView
+from django.views.generic import (CreateView, DetailView, DeleteView,
+                                    UpdateView, RedirectView)
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import UpdateExcelForm
@@ -41,3 +42,37 @@ class CreateCampanhaView(CreateView):
     template_name = "core/create_campanha.html"
     model = CampanhaDoacao
     fields = ['data_inicio', 'data_fim']
+
+
+class UpdateCampanhaView(UpdateView):
+    template_name = "core/campanhadoacao_update.html"
+    template_name_suffix = '_update'
+    model = CampanhaDoacao
+    fields = ['data_inicio', 'data_fim']
+
+    def get_success_url(self):
+        return reverse('users:detail',
+                       kwargs={'pk': self.pk})
+
+    def get_object(self):
+        return CampanhaDoacao.objects.get(self.data_inicio)   
+
+class DeleteCampanhaView(DeleteView):
+    template_name = "core/delete_campanha.html"
+    model = CampanhaDoacao
+    fields = ['data_inicio', 'data_fim']
+
+class DetailCampanhaView(DetailView):
+    model = CampanhaDoacao
+    template_name = "core/campanhadoacao_detail.html"
+
+class CampanhaRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self):
+        return reverse('campanha:detail',
+                       kwargs={'pk': self.pk})
+
+
+
+

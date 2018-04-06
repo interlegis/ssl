@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2> Campanha de Doação</h2>
+        <form action="" method="post">{% csrf_token %}
+		    {{ form.as_p }}
+		    <input type="submit" value="Update" />
+		</form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+

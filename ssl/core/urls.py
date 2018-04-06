@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'campanha'
 urlpatterns = [
     url(
         regex=r'^upload/$',
@@ -9,8 +10,23 @@ urlpatterns = [
         name='upload_excel'
     ),
     url(
-        regex=r'^campanha/$',
+        regex=r'^create/$',
         view=views.CreateCampanhaView.as_view(),
         name='create_campanha'
+    ),
+    url(
+        regex=r'^~redirect/$',
+        view=views.CampanhaRedirectView.as_view(),
+        name='redirect'
+    ),
+    url(
+        regex=r'^detail/(?P<pk>\d+)$',
+        view=views.DetailCampanhaView.as_view(),
+        name='detail'
+    ),
+     url(
+        regex=r'^~update$',
+        view=views.UpdateCampanhaView.as_view(),
+        name='update'
     ),
 ]

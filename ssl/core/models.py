@@ -1,6 +1,7 @@
 from django.db import models
-from model_utils import Choices
 from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
+from model_utils import Choices
 from ssl.users.models import User
 from ssl.orgao.models import Orgao
 import django.utils.timezone
@@ -35,6 +36,9 @@ class CampanhaDoacao(models.Model):
 
     def __str__(self):
         return _('Campanha de {} a {}'.format(str(self.data_inicio), str(self.data_fim)))
+
+    def get_absolute_url(self):
+        return reverse('campanha:detail', kwargs={'pk': self.pk})
 
 
 #class StatusPedido(models.Model):
