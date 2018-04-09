@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2> Campanha de Doação</h2>
+      <p>{{ object.data_inicio }}</p>
+      <p>{{ object.data_fim }}</p>
+      <a class="btn btn-primary blue" href="{% url 'campanha:update' object.id %}" role="button">Editar Campanha</a>
+      <a class="btn btn-primary red" href="{% url 'campanha:delete' object.id %}" role="button">Apagar Campanha</a>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+

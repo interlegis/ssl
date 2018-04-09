@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2> Campanha de Doação</h2>
+      <p>{{ object.data_inicio }}</p>
+      <p>{{ object.data_fim }}</p>
+      <form action="" method="post">{% csrf_token %}
+	    {{ form.as_p }}
+	    <input class="btn btn-primary red" type="submit" value="Delete" />
+	  </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
