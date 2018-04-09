@@ -3,7 +3,7 @@ from django.views.generic import (CreateView, DetailView, DeleteView,
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from .forms import UpdateExcelForm
+from .forms import UpdateExcelForm, CampanhaDoacaoForm
 from .models import ArquivoExcel, CampanhaDoacao
 from .utils import read_excel
 
@@ -42,7 +42,7 @@ class UploadExcelView(CreateView):
 class CreateCampanhaView(CreateView):
     template_name = "core/create_campanha.html"
     model = CampanhaDoacao
-    fields = ['data_inicio', 'data_fim']
+    form_class = CampanhaDoacaoForm
 
 
 class UpdateCampanhaView(UpdateView):
@@ -58,6 +58,7 @@ class UpdateCampanhaView(UpdateView):
     def get_object(self):
         return CampanhaDoacao.objects.get(pk=
                                           self.kwargs['pk'])
+
 
 class DeleteCampanhaView(DeleteView):
     template_name = "core/delete_campanha.html"
