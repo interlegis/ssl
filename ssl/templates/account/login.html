@@ -31,8 +31,8 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 {% else %}
 <div class="container">
-  <p>{% blocktrans %}If you have not created an account yet, then please
-    <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+  <p>{% blocktrans %}Se você ainda não possui uma conta, por favor se
+    <a href="{{ signup_url }}">cadastre</a> primeiro.{% endblocktrans %}</p>
 {% endif %}
 <div class="divider"></div>
 <form class="login" method="POST" action="{% url 'account_login' %}">

@@ -9,8 +9,9 @@
       <p>{{ object.data_inicio }}</p>
       <p>{{ object.data_fim }}</p>
       <form action="" method="post">{% csrf_token %}
-	    {{ form.as_p }}
-	    <input class="btn btn-primary red" type="submit" value="Delete" />
+	     {{ form.as_p }}
+       <p><b>Você realmente deseja excluir essa campanha? </b></p>
+	    <input class="btn btn-primary red" type="submit" value="Deletar" />
 	  </form>
     </div>
   </div>
