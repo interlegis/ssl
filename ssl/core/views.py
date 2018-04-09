@@ -2,6 +2,7 @@ from django.views.generic import (CreateView, DetailView, DeleteView,
                                     UpdateView, RedirectView)
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from .forms import UpdateExcelForm
 from .models import ArquivoExcel, CampanhaDoacao
 from .utils import read_excel
@@ -16,7 +17,7 @@ class UploadExcelView(CreateView):
             form = UpdateExcelForm(request.POST, request.FILES)
             if form.is_valid():
                 read_excel(request.FILES['file'])
-                return HttpResponseRedirect('/success/url/')
+                return HttpResponseRedirect('')
         else:
             form = UpdateExcelForm()
         return render(request, 'upload_excel.html', {'form': form})
@@ -51,11 +52,12 @@ class UpdateCampanhaView(UpdateView):
     fields = ['data_inicio', 'data_fim']
 
     def get_success_url(self):
-        return reverse('users:detail',
-                       kwargs={'pk': self.pk})
+        return reverse('campanha:detail',
+                       kwargs={'pk': self.object.id})
 
     def get_object(self):
-        return CampanhaDoacao.objects.get(self.data_inicio)   
+        return CampanhaDoacao.objects.get(pk=
+                                          self.kwargs['pk'])
 
 class DeleteCampanhaView(DeleteView):
     template_name = "core/delete_campanha.html"

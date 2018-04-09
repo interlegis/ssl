@@ -25,7 +25,7 @@ urlpatterns = [
         name='detail'
     ),
      url(
-        regex=r'^~update$',
+        regex=r'^edit/(?P<pk>\d+)$',
         view=views.UpdateCampanhaView.as_view(),
         name='update'
     ),

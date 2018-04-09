@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="col-sm-12">
-    <a class="btn btn-primary blue" href="{% url 'campanha:update' %}" role="button">Editar Campanha</a>
+    <a class="btn btn-primary blue" href="{% url 'campanha:update' object.id %}" role="button">Editar Campanha</a>
   </div>
 </div>
 {% endblock content %}

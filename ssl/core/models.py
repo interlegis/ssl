@@ -35,7 +35,11 @@ class CampanhaDoacao(models.Model):
         ordering = ['-data_inicio']
 
     def __str__(self):
-        return _('Campanha de {} a {}'.format(str(self.data_inicio), str(self.data_fim)))
+        if self.data_inicio and self.data_fim:
+            return 'Campanha de %s - %s' % (self.data_inicio.strftime("%d/%m/%Y"),
+                                self.data_fim.strftime("%d/%m/%Y"))
+        else:
+            return 'Campanha de Doação'
 
     def get_absolute_url(self):
         return reverse('campanha:detail', kwargs={'pk': self.pk})
@@ -101,7 +105,7 @@ class Representacao(models.Model):
         ordering = ['orgao_representado', 'representante']
 
     def __str__(self):
-        return _('Representação de(a) {}'.format(self.orgao_representado))
+        return str('Representação de(a) {}'.format(self.orgao_representado))
 
 
 class ArquivoExcel(models.Model):
