@@ -1,12 +1,21 @@
 {% extends "base.html" %}
 {% load static i18n %}
-{% block title %}{% endblock %}
+{% block title %}Campanhas{% endblock %}
 
 {% block content %}
 <div class="container">
 	<div class="row">
     	<div class="col-sm-12">
   			<h2>Doação de Campanha</h2>
+        <div class="list-group">
+          {% for campanha in object_list %}
+            <a href="{% url 'campanha:detail' campanha.id %}" class="list-group-item">
+              <h4 class="list-group-item-heading">{{ campanha }}</h4>
+            </a>
+          {% empty %}
+            <h4 class="list-group-item-heading">Ainda não há campanhas!</h4>
+          {% endfor %}
+        </div>
 		</div>
 	</div>
 </div>

@@ -91,4 +91,8 @@ class CampanhaListView(ListView):
     paginate_by = 10
     template_name = "core/list_campanha.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
 
