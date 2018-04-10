@@ -109,5 +109,10 @@ class Representacao(models.Model):
 
 
 class ArquivoExcel(models.Model):
-    arquivo = models.FileField()
+    arquivo = models.FileField(
+        upload_to='media/',
+        help_text='Arquivo Excel com a relação de obras.',
+        verbose_name='Arquivo',
+        blank=True,
+    )
     data_upload = models.DateTimeField(auto_now_add=True)
