@@ -1,10 +1,10 @@
 from django.views.generic import (CreateView, DetailView, DeleteView,
                                     ListView, UpdateView, RedirectView)
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from .forms import UpdateExcelForm, CampanhaDoacaoForm
 from .models import ArquivoExcel, CampanhaDoacao
+from django.http import HttpResponseRedirect
 from .utils import read_excel
 
 class UploadExcelView(CreateView):
@@ -16,28 +16,19 @@ class UploadExcelView(CreateView):
         if request.method == 'POST':
             form = UpdateExcelForm(request.POST, request.FILES)
             if form.is_valid():
-                read_excel(request.FILES['file'])
-                return HttpResponseRedirect('')
+                obras = read_excel(request.FILES['file'])
+                print(obras)
+                form.save()
+                return HttpResponseRedirect('/success/url/')
         else:
             form = UpdateExcelForm()
-        return render(request, 'upload_excel.html', {'form': form})
 
-    def form_valid(self, form):
-        pass
+        return render(request, 'upload_excel.html', {
+            'form': form
+        })
 
-    def form_invalid(self, form):
-        pass
-
-    # def post(self, request, *args, **kwargs):
-    #     form_class = self.get_form_class()
-    #     form = self.get_form(form_class)
-    #     import ipdb; ipdb.set_trace()
-    #     files = request.FILES.getlist('file')
-    #     if form.is_valid():
-    #
-    #         return self.form_valid(form)
-    #     else:
-    #         return self.form_invalid(form)
+    def get_success_url(self):
+        return reverse('campanha:list')
 
 class CreateCampanhaView(CreateView):
     template_name = "core/create_campanha.html"

@@ -9,9 +9,6 @@ class UpdateExcelForm(ModelForm):
         model = ArquivoExcel
         fields = ['arquivo']
 
-    arquivo = forms.FileField()
-
-
 class CampanhaDoacaoForm(forms.ModelForm):
 
     class Meta:
